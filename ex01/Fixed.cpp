@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 09:25:05 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/07/19 15:51:29 by gprada-t         ###   ########.fr       */
+/*   Created: 2024/07/19 15:57:36 by gprada-t          #+#    #+#             */
+/*   Updated: 2024/07/19 16:47:40 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ Fixed::Fixed(const Fixed &src)
 	*this = src;
 }
 
+Fixed::Fixed(const int nb)
+{
+	_rawBits = nb << _fractionalBits;
+}
+
+Fixed::Fixed(const float nb)
+{
+	_rawBits = roundf(nb * (1 << _fractionalBits));
+}
+
 void	Fixed::setRawBits(int const raw)
 {
 	this->_rawBits = raw;
@@ -45,4 +55,20 @@ Fixed &Fixed::operator=(const Fixed &src)
 	std::cout << "copy assignment operator called" << std::endl;
 	this->_rawBits = src.getRawBits();
 	return (*this);
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &src)
+{
+	out << src.toFloat();
+	return out;
+}
+
+int	Fixed::toInt(void) const
+{
+	return _rawBits >> _fractionalBits;
+}
+
+float	Fixed::toFloat(void) const
+{
+	return (float)_rawBits / (1 << _fractionalBits);
 }
