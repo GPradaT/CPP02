@@ -6,7 +6,7 @@
 /*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:57:51 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/07/20 10:54:38 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/07/20 13:48:43 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,26 @@ class	Fixed
 		float	toFloat(void) const;
 
 		Fixed	&operator=(const Fixed &src);
-		Fixed	operator+(const Fixed &src);
-		Fixed	operator-(const Fixed &src);
-		Fixed	operator*(const Fixed &src);
-		Fixed	operator/(const Fixed &src);
+		Fixed	operator+(const Fixed &src) const;
+		Fixed	operator-(const Fixed &src) const;
+		Fixed	operator*(const Fixed &src) const;
+		Fixed	operator/(const Fixed &src) const;
 
-		bool	operator<(const Fixed &src);
-		bool	operator>(const Fixed &src);
-		bool	operator>=(const Fixed &src);
-		bool	operator<=(const Fixed &src);
-		bool	operator==(const Fixed &src);
+		bool	operator<(const Fixed &src) const;
+		bool	operator>(const Fixed &src) const;
+		bool	operator>=(const Fixed &src) const;
+		bool	operator<=(const Fixed &src) const;
+		bool	operator==(const Fixed &src) const;
+
+		Fixed	&operator++();
+		Fixed	operator++(int);
+		Fixed	&operator--();
+		Fixed	operator--(int);
+
+		static Fixed	&min(Fixed &a, Fixed &b);
+		static const Fixed	&min(const Fixed &a, const Fixed &b);
+		static Fixed	&max(Fixed &a, Fixed &b);
+		static const Fixed	&max(const Fixed &a, const Fixed &b);
 };
 
 std::ostream & operator<<(std::ostream &out, const Fixed &src);
